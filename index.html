@@ -1,0 +1,436 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Landing Page</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Menu Styling */
+        #navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            padding: 15px 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease-in-out;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        #navbar ul li {
+            margin: 0 20px;
+        }
+
+        #navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease-in-out;
+        }
+
+        #navbar ul li a::before {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color:#1E90FF;
+            z-index: -1;
+            transition: width 0.4s ease-in-out;
+        }
+
+        #navbar ul li a:hover::before {
+            width: 100%;
+        }
+
+        #navbar ul li a:hover {
+            color: #fff;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 100px 20px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 1.5s ease-in-out;
+        }
+
+        /* Home Section */
+        #home {
+            background: linear-gradient(120deg, #f7f7f7, #ffd1a4);
+            animation: homeBgAnimation 10s infinite alternate;
+            color: #111;
+        }
+
+        @keyframes homeBgAnimation {
+            0% {
+                background: linear-gradient(120deg, #f7f7f7, #1E90FF);
+            }
+            50% {
+                background: linear-gradient(120deg, #1E90FF, #f7f7f7);
+            }
+            100% {
+                background: linear-gradient(120deg, #f7f7f7, #1E90FF);
+            }
+        }
+
+        .home-content {
+            max-width: 800px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* About Section */
+        #about {
+            background: linear-gradient(120deg, #9bc7cd, #f5f7f8);
+            animation: aboutBgAnimation 10s infinite alternate;
+            color: #333;
+        }
+
+        @keyframes aboutBgAnimation {
+            0% {
+                background: linear-gradient(120deg, #9bc7cd, #f5f7f8);
+            }
+            50% {
+                background: linear-gradient(120deg, #f5f7f8, #9bc7cd);
+            }
+            100% {
+                background: linear-gradient(120deg, #9bc7cd, #f5f7f8);
+            }
+        }
+
+        /* Services Section */
+        #services {
+            background: linear-gradient(120deg, #fdfcfb, #abd36f);
+            animation: servicesBgAnimation 10s infinite alternate;
+            color: #333;
+        }
+        h2{
+            font-size: 1.875em;
+        }
+        @keyframes servicesBgAnimation {
+            0% {
+                background: linear-gradient(120deg, #fdfcfb, #B9D9EB);
+            }
+            50% {
+                background: linear-gradient(120deg, #B9D9EB, #fdfcfb);
+            }
+            100% {
+                background: linear-gradient(120deg, #fdfcfb, #B9D9EB);
+            }
+        }
+
+        .services-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 50px 0;
+        }
+
+        .service-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 300px;
+            transition: transform 0.5s, background-color 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 0;
+            top: 0;
+            left: 0;
+            background-color: #89CFF0;
+            z-index: -1;
+            transition: height 0.3s ease-in-out;
+        }
+
+        .service-card:hover::before {
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            color: #181616;
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            z-index: 1;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            z-index: 1;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .service-card:hover h3,
+        .service-card:hover p {
+            color: #0a0909;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(120deg, #e0d558, #f5f2f2);
+            animation: contactBgAnimation 10s infinite alternate;
+            color: #333;
+        }
+
+        @keyframes contactBgAnimation {
+            0% {
+                background: linear-gradient(120deg, #4682B4, #f5f2f2);
+            }
+            50% {
+                background: linear-gradient(120deg, #f5f2f2, #4682B4);
+            }
+            100% {
+                background: linear-gradient(120deg, #4682B4, #f5f2f2);
+            }
+        }
+
+        .contact-form {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: left;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .contact-form label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 70%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #004170;
+            outline: none;
+        }
+
+        .contact-form button {
+            padding: 12px 30px;
+            background-color: #5D8AA8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color:#034694;
+            transform: translateY(-3px);
+        }
+
+        /* Scroll Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Change navbar background color when scrolling */
+        .scrolled {
+            background-color: rgba(51, 51, 51, 0.9);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #navbar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #navbar ul li {
+                margin: 10px 0;
+            }
+
+            #home h1 {
+                font-size: 2.5rem;
+            }
+
+            #home p {
+                font-size: 1rem;
+            }
+
+            .services-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service-card {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav id="navbar">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="home-content">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXqrumM7J0Nl0GBBCM3qiIdHs7GdwHPncEXw&s" style="border-radius: 50% ";>
+            <h1>Transform Your Business with Innovative Solutions</h1>
+            <p>At Prodigy Infotech, we specialize in creating powerful digital experiences that help your business thrive in the modern world. Whether you need a new website, digital marketing, or custom software solutions, we're here to take your business to the next level.</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-content">
+            <h2>About Us</h2>
+            <p>We are a team of dedicated professionals committed to delivering top-notch services that help your business grow. With years of experience and a passion for excellence, we ensure that every project we undertake is a success.</p>
+            <p>Our team is composed of experts in web development, digital marketing, and software engineering, who work collaboratively to bring your vision to life. We stay ahead of industry trends and continuously improve our skills to provide innovative solutions tailored to your business needs.</p>
+            <p>At Prodigy Infotech, we believe in the power of technology to transform businesses. Our mission is to empower our clients by offering cutting-edge solutions that are not only functional but also scalable and user-friendly. We take pride in our ability to deliver projects on time, within budget, and to the highest standards of quality.</p>
+            <p>Our approach is client-focused, ensuring that we understand your unique challenges and goals. We partner with you every step of the way, from initial consultation to project completion, providing personalized support and guidance. Your success is our success, and we are committed to helping you achieve it.</p>
+        </div>
+        <div><img src="https://cdni.iconscout.com/illustration/premium/thumb/software-development-illustration-download-in-svg-png-gif-file-formats--engineers-developers-house-isometric-pack-business-illustrations-3804433.png"></div>
+    </section>
+
+    <section id="services">
+        <div class="services-content">
+            <h2>Services</h2>
+            <div class="services-container">
+                <div class="service-card">
+                    <h3>Web Development</h3>
+                    <p>We create stunning and responsive websites that effectively communicate your brand’s message and drive growth.</p>
+                </div>
+                <div class="service-card">
+                    <h3>SEO Optimization</h3>
+                    <p>Our SEO strategies improve your website’s visibility, driving more traffic and increasing your online presence.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Digital Marketing</h3>
+                    <p>We develop customized digital marketing campaigns that generate leads and convert them into loyal customers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-content">
+            <h2>Contact Us</h2>
+            <form class="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="3" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Change navbar style on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
